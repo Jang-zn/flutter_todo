@@ -36,19 +36,17 @@ class _ToDoMainState extends State<ToDoMain> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Column(children: [
-          Text(
-            "오늘 할 일",),
-          ListView(scrollDirection: Axis.vertical, children: todayPlan)
-        ]),
-        Container(height: 30),
-        Column(children: [
+      body: ListView(
+        children : [
+          Text("오늘 할일",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          Container(height:30),
           Text("완료한 일",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-          ListView(scrollDirection: Axis.vertical, children: todayPlan)
-        ])
-      ]),
+          Container(height:30),
+        ]
+      )
+      ,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {

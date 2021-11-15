@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -37,12 +39,13 @@ class _ToDoMainState extends State<ToDoMain> {
         title: Text(widget.title),
       ),
       body: ListView(
-        children : [
+        padding : EdgeInsets.all(30),
+        children : <Widget>[
           Text("오늘 할일",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-          Container(height:30),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+          Container(height:40),
           Text("완료한 일",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
           Container(height:30),
         ]
       )

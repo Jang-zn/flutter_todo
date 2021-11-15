@@ -11,6 +11,7 @@ class ToDoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "To-Do App",
+      theme: ThemeData.light(),
       home: ToDoMain(title: "To-Do App"),
     );
   }
@@ -35,10 +36,10 @@ class _ToDoMainState extends State<ToDoMain> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(children: [
+      body: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         Column(children: [
-          Text("오늘 할일",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          Text(
+            "오늘 할 일",),
           ListView(scrollDirection: Axis.vertical, children: todayPlan)
         ]),
         Container(height: 30),
@@ -62,6 +63,7 @@ class _ToDoMainState extends State<ToDoMain> {
           BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: "더보기"),
         ],
         onTap: (idx) {
+          print(idx);
           setState(() {
             _idx = idx;
           });

@@ -146,6 +146,7 @@ class _ToDoMainState extends State<ToDoMain> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
+          print("push addpage");
           Navigator.of(context).push(
               MaterialPageRoute(
                   builder : (ctx)=>Add_Plan(

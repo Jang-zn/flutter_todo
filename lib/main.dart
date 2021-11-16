@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'data/todo.dart';
+
 void main() {
   runApp(ToDoApp());
 }
@@ -29,27 +31,46 @@ class ToDoMain extends StatefulWidget {
 
 class _ToDoMainState extends State<ToDoMain> {
   int _idx = 0;
-  List<ListTile> todayPlan = [];
-  List<ListTile> completePlan = [];
+  List<Todo> todayPlan = [
+    Todo(
+      title : "출근",
+      memo : "개발",
+      category : "일",
+      color : Colors.red.value,
+      done : 0,
+      date : 20211116,
+    ),
+    Todo(
+        title : "출근",
+        memo : "개발",
+        category : "일",
+        color : Colors.blue.value,
+        done : 0,
+        date : 20211116,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(child : AppBar(
-      ), preferredSize: Size.fromHeight(0),),
-      body: ListView(
-        padding : EdgeInsets.all(30),
-        children : <Widget>[
-          Text("오늘 할일",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          ListTile(tileColor: Colors.red,),
-          Container(height:40),
-          Text("완료한 일",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          Container(height:30),
-        ]
-      )
-      ,
+      appBar: PreferredSize(
+        child: AppBar(),
+        preferredSize: Size.fromHeight(0),
+      ),
+      body: ListView.builder(itemBuilder: (ctx, idx) {
+            if(idx==0){
+              return Container(child : Text("오늘 할일", style : TextStyle(fontSize: 20, fontWeight: FontWeight.bold)));
+            }else if(idx==1){
+              return Container(
+                child:Column(
+
+                ),
+              );
+            }
+            return Container();
+          },
+          itemCount : 4
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {

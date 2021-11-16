@@ -8,7 +8,6 @@ class Todo{
   int date; // 날짜비교를 위해서 int 사용
 
 
-  Todo(this.title, this.memo, this.category, this.color, this.done, this.date){
+  Todo({required this.title, required this.memo, required this.category, required this.color, required this.done, required this.date});
 
-  }
 }

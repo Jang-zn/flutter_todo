@@ -1,8 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/data/todo.dart';
-import 'view/add_plan.dart';
+import 'package:flutter_todo/view/writeplan.dart';
 
 
 import 'data/util.dart';
@@ -59,6 +57,22 @@ class _ToDoMainState extends State<ToDoMain> {
       appBar: PreferredSize(
         child: AppBar(),
         preferredSize: Size.fromHeight(0),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: (){
+          print(DateTime.now());
+          Navigator.of(context).push(MaterialPageRoute(
+              builder:(ctx)=>WritePlan(todo: Todo(
+                  title:"",
+                  color:0,
+                  done:0,
+                  date:Utils.getFormatTime(DateTime.now()),
+                  memo:"",
+                  category:""
+              ))
+          ));
+        },
       ),
       body: ListView.builder(itemBuilder: (ctx, idx) {
             if(idx==0){
@@ -142,25 +156,6 @@ class _ToDoMainState extends State<ToDoMain> {
             return Container();
           },
           itemCount : 4
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          print("push addpage");
-          Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder : (ctx)=>Add_Plan(
-                    todo : Todo(
-                      title : "",
-                      memo : "",
-                      category : "",
-                      color : 0,
-                      done : 0,
-                      date : Utils.getFormatTime(DateTime.now()),
-                    ),
-                  )));
-          //TODO : 계획 작성 페이지로 이동
-        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [

@@ -37,7 +37,7 @@ class _ToDoMainState extends State<ToDoMain> {
       memo : "개발1",
       category : "일",
       color : Colors.red.value,
-      done : 0,
+      done : 1,
       date : 20211116,
     ),
     Todo(
@@ -61,30 +61,78 @@ class _ToDoMainState extends State<ToDoMain> {
             if(idx==0){
               return Container(child : Text("오늘 할일", style : TextStyle(fontSize: 20, fontWeight: FontWeight.bold)));
             }else if(idx==1){
+
+              List<Todo> undone = todayPlan.where((t){
+                return t.done==0;
+              }).toList();
+
               return Container(
                 margin : EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 child:Column(
-                  children : List.generate(todayPlan.length, (index){
-                    Todo t = todayPlan[index];
+                  children : List.generate(undone.length, (index){
+                    Todo t = undone[index];
                     return Container(
+                      decoration: BoxDecoration(
+                        color : Color(t.color),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      padding : EdgeInsets.symmetric(horizontal:5, vertical:5),
                       margin : EdgeInsets.symmetric(vertical: 3),
                       child : Row(
                         children:[
                           Column(children:[
-                            Text(t.title),
-                            Text(t.memo),
+                            Text(t.title, style:TextStyle(fontSize : 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                            Text(t.memo,style:TextStyle(fontSize : 13, fontWeight: FontWeight.bold, color: Colors.white)),
                           ]),
                           Column(children : [
-                            Text("${t.done==1?'완료':'미완료'}")
+                            Text("미완료",style:TextStyle(fontSize : 17, fontWeight: FontWeight.bold, color: Colors.white))
                           ],
                             crossAxisAlignment: CrossAxisAlignment.start,
                           ),
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                       ),
-                      color : Color(t.color),
                     );
                   })
+                ),
+              );
+            }
+            else if(idx==2){
+              return Container(child : Text("실천 완료", style : TextStyle(fontSize: 20, fontWeight: FontWeight.bold)));
+            }else if(idx==3){
+
+              List<Todo> done = todayPlan.where((t){
+                return t.done==1;
+              }).toList();
+
+              return Container(
+                margin : EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                child:Column(
+                    children : List.generate(done.length, (index){
+                      Todo t = done[index];
+                      return Container(
+                        decoration: BoxDecoration(
+                          color : Color(t.color),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        padding : EdgeInsets.symmetric(horizontal:5, vertical:5),
+                        margin : EdgeInsets.symmetric(vertical: 3),
+                        child : Row(
+                          children:[
+                            Column(children:[
+                              Text(t.title, style:TextStyle(fontSize : 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                              Text(t.memo,style:TextStyle(fontSize : 13, fontWeight: FontWeight.bold, color: Colors.white)),
+                            ]),
+                            Column(children : [
+                              Text("완료",style:TextStyle(fontSize : 17, fontWeight: FontWeight.bold, color: Colors.white))
+                            ],
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                            ),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        ),
+                      );
+                    })
                 ),
               );
             }

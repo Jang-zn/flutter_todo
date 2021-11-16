@@ -35,14 +35,14 @@ class _ToDoMainState extends State<ToDoMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: PreferredSize(child : AppBar(
+      ), preferredSize: Size.fromHeight(0),),
       body: ListView(
         padding : EdgeInsets.all(30),
         children : <Widget>[
           Text("오늘 할일",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          ListTile(tileColor: Colors.red,),
           Container(height:40),
           Text("완료한 일",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),

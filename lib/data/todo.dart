@@ -2,10 +2,10 @@
 class Todo{
   String title;
   String memo;
-  final String category;
-  final int color;
-  final int done;
-  final int date; // 날짜비교를 위해서 int 사용..??
+  String category;
+  int color;
+  int done;
+  int date; // 날짜비교를 위해서 int 사용..??
 
   Todo(
       {

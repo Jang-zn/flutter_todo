@@ -16,15 +16,21 @@ class WritePlan extends StatefulWidget {
 class _WritePlanState extends State<WritePlan> {
   TextEditingController titleController = TextEditingController();
   TextEditingController memoController = TextEditingController();
+  int colorIndex=0;
+  int ctIndex=0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           TextButton(
-            child:Text("저장", style: TextStyle(color: Colors.white),),
+            child:Text("저장", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
             onPressed: (){
+              widget.todo.title = titleController.text;
+              widget.todo.memo = memoController.text;
 
+              Navigator.of(context).pop(widget.todo);
             },
           ),
         ],
@@ -53,7 +59,7 @@ class _WritePlanState extends State<WritePlan> {
               children:[
                 Text("색상", style:TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                 Container(
-                    color:Color(widget.todo.color==0?Colors.grey.value:widget.todo.color),
+                    color:Color(widget.todo.color),
                     width:15,
                     height:15,
                   margin:EdgeInsets.only(right:20)
@@ -69,15 +75,20 @@ class _WritePlanState extends State<WritePlan> {
               Color(0xfffb8a94),
               Color(0xfffebd9a),
               Color(0xff51e29d),
-              Color(0xffffffff),
+              Color(0xffaaaaaa),
             ];
 
-
+            widget.todo.color = colors[colorIndex].value;
+            colorIndex++;
+            setState(() {
+              colorIndex = colorIndex % colors.length;
+            });
           },
           );
         } else if(idx==3){
-          return Container(
+          return InkWell(child:Container(
               margin:EdgeInsets.symmetric(vertical:10, horizontal: 25),
+              padding:EdgeInsets.only(right:15),
             child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children:[
@@ -85,6 +96,15 @@ class _WritePlanState extends State<WritePlan> {
                 Text(widget.todo.category),
               ]
             )
+          ),
+            onTap:(){
+              List<String> list = ["회사","잡일","기타"];
+              widget.todo.category = list[ctIndex];
+              ctIndex++;
+              setState(() {
+                ctIndex = ctIndex % list.length;
+              });
+            }
           );
         } else if(idx==4){
           return Container(

@@ -60,9 +60,9 @@ class _ToDoMainState extends State<ToDoMain> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){
+        onPressed: () async {
           print(DateTime.now());
-          Navigator.of(context).push(
+          Todo todo = await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (ctx)=>WritePlan(todo: Todo(
                 title : "",
@@ -74,6 +74,9 @@ class _ToDoMainState extends State<ToDoMain> {
               ))
             )
           );
+          setState(() {
+            todayPlan.add(todo);
+          });
         },
       ),
       body: ListView.builder(itemBuilder: (ctx, idx) {

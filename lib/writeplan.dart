@@ -20,6 +20,14 @@ class _WritePlanState extends State<WritePlan> {
   int ctIndex=0;
 
   @override
+  void initState(){
+    super.initState();
+    titleController.text = widget.todo.title;
+    memoController.text = widget.todo.memo;
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

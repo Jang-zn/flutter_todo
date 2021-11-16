@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/data/todo.dart';
+import 'view/add_plan.dart';
 
-import 'data/todo.dart';
+
+import 'data/util.dart';
 
 void main() {
   runApp(ToDoApp());
@@ -143,6 +146,18 @@ class _ToDoMainState extends State<ToDoMain> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder : (ctx)=>Add_Plan(
+                    todo : Todo(
+                      title : "",
+                      memo : "",
+                      category : "",
+                      color : 0,
+                      done : 0,
+                      date : Utils.getFormatTime(DateTime.now()),
+                    ),
+                  )));
           //TODO : 계획 작성 페이지로 이동
         },
       ),

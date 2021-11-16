@@ -33,16 +33,16 @@ class _ToDoMainState extends State<ToDoMain> {
   int _idx = 0;
   List<Todo> todayPlan = [
     Todo(
-      title : "출근",
-      memo : "개발",
+      title : "출근1",
+      memo : "개발1",
       category : "일",
       color : Colors.red.value,
       done : 0,
       date : 20211116,
     ),
     Todo(
-        title : "출근",
-        memo : "개발",
+        title : "출근2",
+        memo : "개발2",
         category : "일",
         color : Colors.blue.value,
         done : 0,
@@ -62,8 +62,29 @@ class _ToDoMainState extends State<ToDoMain> {
               return Container(child : Text("오늘 할일", style : TextStyle(fontSize: 20, fontWeight: FontWeight.bold)));
             }else if(idx==1){
               return Container(
+                margin : EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 child:Column(
-
+                  children : List.generate(todayPlan.length, (index){
+                    Todo t = todayPlan[index];
+                    return Container(
+                      margin : EdgeInsets.symmetric(vertical: 3),
+                      child : Row(
+                        children:[
+                          Column(children:[
+                            Text(t.title),
+                            Text(t.memo),
+                          ]),
+                          Column(children : [
+                            Text("${t.done==1?'완료':'미완료'}")
+                          ],
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      ),
+                      color : Color(t.color),
+                    );
+                  })
                 ),
               );
             }

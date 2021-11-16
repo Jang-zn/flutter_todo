@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/data/todo.dart';
-import 'package:flutter_todo/view/writeplan.dart';
+import 'package:flutter_todo/writeplan.dart';
 
 
 import 'data/util.dart';
@@ -62,16 +62,18 @@ class _ToDoMainState extends State<ToDoMain> {
         child: Icon(Icons.add),
         onPressed: (){
           print(DateTime.now());
-          Navigator.of(context).push(MaterialPageRoute(
-              builder:(ctx)=>WritePlan(todo: Todo(
-                  title:"",
-                  color:0,
-                  done:0,
-                  date:Utils.getFormatTime(DateTime.now()),
-                  memo:"",
-                  category:""
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx)=>WritePlan(todo: Todo(
+                title : "",
+                category:"",
+                memo:"",
+                done:0,
+                color:0,
+                date:Utils.getFormatTime(DateTime.now())
               ))
-          ));
+            )
+          );
         },
       ),
       body: ListView.builder(itemBuilder: (ctx, idx) {

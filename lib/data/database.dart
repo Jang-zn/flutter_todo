@@ -20,13 +20,12 @@ class DatabaseHelper{
   }
 
   _initDatabase() async {
-    var databasePath = await getDatabasePath();
-    String path = join(databasePath, _databaseName);
+    String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path, version:_databaseVersion, onCreate:_onCreate, onUpgrade: _onUpgrade);
   }
 
   Future _onCreate(Database db, int version) async {
-    await db.excute('''
+    await db.execute('''
     CREATE TABLE IF NOT EXISTS $todoTable (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       date INTEGER DEFAULT 0,
@@ -43,7 +42,7 @@ class DatabaseHelper{
 
   //CRUD
   Future<int> insertTodo(Todo todo) async {
-    Database db = await instance.database;
+    Database? db = await instance.database;
     if(todo.id==null){
       Map<String, dynamic> row = {
         "title" : todo.title,
@@ -52,7 +51,7 @@ class DatabaseHelper{
         "color" : todo.color,
         "category" : todo.category,
       };
-      return await db.insert(todoTable, row);
+      return await db!.insert(todoTable, row);
     }else{
       Map<String, dynamic> row = {
         "title" : todo.title,
@@ -62,15 +61,15 @@ class DatabaseHelper{
         "category" : todo.category,
         "done" : todo.done
       };
-      return await db.update(todoTable, row, where: "id=?", whereArgs: [todo.id]);
+      return await db!.update(todoTable, row, where: "id=?", whereArgs: [todo.id]);
     }
   }
 
   Future<List<Todo>> getAllTodo() async {
-    Database db = await instance.database;
+    Database? db = await instance.database;
     List<Todo> list = [];
 
-    var queries = await db.query(todoTable);
+    var queries = await db!.query(todoTable);
     for(var q in queries){
       list.add(Todo(id : q["id"],
         title : q["title"],
@@ -85,10 +84,10 @@ class DatabaseHelper{
   }
 
   Future<List<Todo>> getTodoFromDate(int date) async {
-    Database db = await instance.database;
+    Database? db = await instance.database;
     List<Todo> list = [];
 
-    var queries = await db.query(todoTable, where: "date=?", whereArgs: [date]);
+    var queries = await db!.query(todoTable, where: "date=?", whereArgs: [date]);
     for(var q in queries){
       list.add(Todo(id : q["id"],
           title : q["title"],

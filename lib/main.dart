@@ -58,7 +58,6 @@ class _ToDoMainState extends State<ToDoMain> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
-          print(DateTime.now());
           Todo todo = await Navigator.of(context).push(MaterialPageRoute(
               builder: (ctx) => WritePlan(
                   todo: Todo(
@@ -76,13 +75,10 @@ class _ToDoMainState extends State<ToDoMain> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "오늘"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today), label: "기록"),
-          BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: "더보기"),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: "기록"),
         ],
         currentIndex: _idx,
         onTap: (idx) {
-          print(idx);
           if(idx==1){
             getAllTodo();
           }
@@ -189,10 +185,24 @@ class _ToDoMainState extends State<ToDoMain> {
     return ListView.builder(
         itemBuilder:(ctx, idx) {
           if (idx == 0) {
-            return Container(child: Column(children: [
-              Text("${Utils.numToDateTime(allTodo[idx].date).month}월 ${Utils.numToDateTime(allTodo[idx].date).day}일", style:TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              TodoCardWidget(todo: allTodo[idx]),
-            ]));
+            if(allTodo[idx].date==Utils.getFormatTime(DateTime.now())){
+              return Container(child: Column(children: [
+                Container(height:30),
+                Text("오늘", style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold)),
+                TodoCardWidget(todo: allTodo[idx]),
+              ]));
+            }else {
+              return Container(child: Column(children: [
+                Text("${Utils
+                    .numToDateTime(allTodo[idx].date)
+                    .month}월 ${Utils
+                    .numToDateTime(allTodo[idx].date)
+                    .day}일", style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold)),
+                TodoCardWidget(todo: allTodo[idx]),
+              ]));
+            }
           }else{
             if(allTodo[idx].date==allTodo[idx-1].date){
               return TodoCardWidget(todo: allTodo[idx]);

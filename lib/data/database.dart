@@ -72,7 +72,7 @@ class DatabaseHelper{
     Database? db = await instance.database;
     List<Todo> list = [];
 
-    var queries = await db!.query(todoTable);
+    var queries = await db!.query(todoTable,orderBy:"date DESC");
     for(var q in queries){
       list.add(Todo(id : q["id"] as int,
         title : q["title"] as String,

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/data/todo.dart';
+import 'package:flutter_todo/widget/TodoCardWidget.dart';
 import 'package:flutter_todo/writeplan.dart';
 
 import 'data/database.dart';
@@ -58,7 +59,7 @@ class _ToDoMainState extends State<ToDoMain> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
-          Todo todo = await Navigator.of(context).push(MaterialPageRoute(
+          await Navigator.of(context).push(MaterialPageRoute(
               builder: (ctx) => WritePlan(
                   todo: Todo(
                       title: "",
@@ -168,7 +169,7 @@ class _ToDoMainState extends State<ToDoMain> {
                       getTodayTodo();
                     },
                     onLongPress: () async {
-                      Todo todo = await Navigator.of(context).push(
+                      await Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (ctx) => WritePlan(todo: t)));
                       getTodayTodo();
@@ -236,49 +237,5 @@ class _ToDoMainState extends State<ToDoMain> {
           }
         },
         itemCount: allTodo.length);
-  }
-}
-
-class TodoCardWidget extends StatelessWidget {
-  const TodoCardWidget({Key? key, required this.todo}) : super(key: key);
-  final Todo todo;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(todo.color),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-      child: Row(
-        children: [
-          Column(children: [
-            Text(todo.title,
-                style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)),
-            Text(todo.memo,
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)),
-          ]),
-          Column(
-            children: [
-              Text("${todo.done == 0 ? '미완료' : '완료'}",
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white))
-            ],
-            crossAxisAlignment: CrossAxisAlignment.start,
-          ),
-        ],
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-      ),
-    );
   }
 }

@@ -75,10 +75,10 @@ class DatabaseHelper{
     var queries = await db!.query(todoTable,orderBy:"date DESC");
     for(var q in queries){
       list.add(Todo(id : q["id"] as int,
-        title : q["title"] as String,
+        title : q["title"] .toString(),
         color : q["color"] as int,
-        memo : q["memo"] as String,
-        category: q["category"] as String,
+        memo : q["memo"] .toString(),
+        category: q["category"] .toString(),
         date : q["date"] as int,
         done : q["done"] as int
       ));
@@ -93,10 +93,10 @@ class DatabaseHelper{
     var queries = await db!.query(todoTable, where: "date=?", whereArgs: [date]);
     for(var q in queries){
       list.add(Todo(id : q["id"] as int,
-          title : q["title"] as String,
+          title : q["title"].toString(),
           color : q["color"] as int,
-          memo : q["memo"] as String,
-          category: q["category"] as String,
+          memo : q["memo"].toString(),
+          category: q["category"].toString(),
           date : q["date"] as int,
           done : q["done"] as int
       ));

@@ -33,6 +33,7 @@ class DatabaseHelper{
       memo String, 
       color INTEGER,
       category String
+      )
     ''');
   }
 
@@ -71,13 +72,13 @@ class DatabaseHelper{
 
     var queries = await db!.query(todoTable);
     for(var q in queries){
-      list.add(Todo(id : q["id"],
-        title : q["title"],
-        color : q["color"],
-        memo : q["memo"],
-        category: q["category"],
-        date : q["date"],
-        done : q["done"]
+      list.add(Todo(id : q["id"] as int,
+        title : q["title"] as String,
+        color : q["color"] as int,
+        memo : q["memo"] as String,
+        category: q["category"] as String,
+        date : q["date"] as int,
+        done : q["done"] as int
       ));
     }
     return list;
@@ -89,13 +90,13 @@ class DatabaseHelper{
 
     var queries = await db!.query(todoTable, where: "date=?", whereArgs: [date]);
     for(var q in queries){
-      list.add(Todo(id : q["id"],
-          title : q["title"],
-          color : q["color"],
-          memo : q["memo"],
-          category: q["category"],
-          date : q["date"],
-          done : q["done"]
+      list.add(Todo(id : q["id"] as int,
+          title : q["title"] as String,
+          color : q["color"] as int,
+          memo : q["memo"] as String,
+          category: q["category"] as String,
+          date : q["date"] as int,
+          done : q["done"] as int
       ));
     }
     return list;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/data/todo.dart';
 import 'package:flutter_todo/writeplan.dart';
 
+import 'data/database.dart';
 import 'data/util.dart';
 
 void main() {
@@ -32,6 +33,13 @@ class ToDoMain extends StatefulWidget {
 class _ToDoMainState extends State<ToDoMain> {
   int _idx = 0;
   List<Todo> todayPlan = [];
+  final dbHelper = DatabaseHelper.instance;
+
+  void getTodayTodo() async {
+    todayPlan = await dbHelper.getTodoFromDate(Utils.getFormatTime(DateTime.now()));
+    setState(() {});
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +156,11 @@ class _ToDoMainState extends State<ToDoMain> {
         currentIndex: _idx,
       ),
     );
+  }
+
+  @override
+  void initState() {
+   getTodayTodo();
   }
 }
 

@@ -32,7 +32,8 @@ class DatabaseHelper{
       title String,
       memo String, 
       color INTEGER,
-      category String
+      category String,
+      done INTEGER
       )
     ''');
   }
@@ -51,6 +52,7 @@ class DatabaseHelper{
         "memo" : todo.memo,
         "color" : todo.color,
         "category" : todo.category,
+        "done" : 0
       };
       return await db!.insert(todoTable, row);
     }else{

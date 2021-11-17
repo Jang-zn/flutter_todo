@@ -55,16 +55,14 @@ class _ToDoMainState extends State<ToDoMain> {
           Todo todo = await Navigator.of(context).push(MaterialPageRoute(
               builder: (ctx) => WritePlan(
                   todo: Todo(
-                      id : null,
                       title: "",
                       category: "",
                       memo: "",
                       done: 0,
                       color: 0,
-                      date: Utils.getFormatTime(DateTime.now())))));
-          setState(() {
-            todayPlan.add(todo);
-          });
+                      date: Utils.getFormatTime(DateTime.now()))
+              )));
+          getTodayTodo();
         },
       ),
       body: ListView.builder(
@@ -160,7 +158,7 @@ class _ToDoMainState extends State<ToDoMain> {
 
   @override
   void initState() {
-   getTodayTodo();
+    getTodayTodo();
   }
 }
 

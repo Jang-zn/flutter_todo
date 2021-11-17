@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/data/todo.dart';
 
+import 'data/database.dart';
+
 class WritePlan extends StatefulWidget {
   WritePlan({Key? key, required this.todo}) : super(key: key);
   Todo todo;
@@ -18,6 +20,7 @@ class _WritePlanState extends State<WritePlan> {
   TextEditingController memoController = TextEditingController();
   int colorIndex=0;
   int ctIndex=0;
+  final dbHelper = DatabaseHelper.instance;
 
   @override
   void initState(){
@@ -34,10 +37,11 @@ class _WritePlanState extends State<WritePlan> {
         actions: [
           TextButton(
             child:Text("저장", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
-            onPressed: (){
+            onPressed: () async {
               widget.todo.title = titleController.text;
               widget.todo.memo = memoController.text;
-
+              widget.todo.done=widget.todo.done==null?0:1;
+              await dbHelper.insertTodo(widget.todo);
               Navigator.of(context).pop(widget.todo);
             },
           ),

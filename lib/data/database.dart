@@ -103,4 +103,10 @@ class DatabaseHelper{
     }
     return list;
   }
+
+  Future<int?> updateTodo(Todo todo) async{
+    Database? db = await instance.database;
+    Future<int> result = db!.update(todoTable, todo.getMap(), where:"id=?",whereArgs: [todo.id]);
+    return result;
+  }
 }

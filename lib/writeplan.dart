@@ -40,7 +40,7 @@ class _WritePlanState extends State<WritePlan> {
             onPressed: () async {
               widget.todo.title = titleController.text;
               widget.todo.memo = memoController.text;
-              widget.todo.done=widget.todo.done==null?0:1;
+              widget.todo.done=widget.todo.done==null?0:widget.todo.done;
               await dbHelper.insertTodo(widget.todo);
               Navigator.of(context).pop(widget.todo);
             },

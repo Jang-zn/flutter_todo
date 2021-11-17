@@ -14,4 +14,17 @@ class Todo{
       }
       );
 
+  Map<String, dynamic> getMap(){
+    Map<String, dynamic> map={
+      "id":this.id,
+      "title":this.title,
+      "memo":this.memo,
+      "category":this.category,
+      "color":this.color,
+      "done":this.done,
+      "date":this.date
+    };
+    return map;
+  }
+
 }

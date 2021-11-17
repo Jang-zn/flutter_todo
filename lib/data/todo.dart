@@ -1,6 +1,6 @@
 
 class Todo{
-  int id;
+  int? id;
   String title;
   String memo;
   String category;
@@ -10,7 +10,7 @@ class Todo{
 
   Todo(
       {
-        required this.id, required this.title, required this.memo, required this.category, required this.color, required this.done, required this.date
+        this.id, required this.title, required this.memo, required this.category, required this.color, required this.done, required this.date
       }
       );
 
